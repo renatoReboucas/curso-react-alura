@@ -1,13 +1,19 @@
 import React, {useState } from 'react';
 
+import FormValidator from '../FormValidator'
+import validator from 'validator';
 // import { Container } from './styles';
 
 
 export default function Formulario(props) {
+
+  // this.validator = new FormValidator()
+  const validator = new FormValidator()
   
   const [nome, setNome] = useState('')
   const [livro, setLivro] = useState('')
   const [preco, setPreco] = useState('')
+
 
   function submitForm(){
     const data = {
@@ -15,11 +21,15 @@ export default function Formulario(props) {
       livro,
       preco
     }
-    props.escutadorSubmit(data)
+    if(validator.valida(data)){
+      props.escutadorSubmit(data)
+      setPreco('')
+      setLivro('')
+      setNome('')
+    }else{
+      console.log("Submit bloqueado!");
+    }
 
-    setPreco('')
-    setLivro('')
-    setNome('')
   }
 
   return (
