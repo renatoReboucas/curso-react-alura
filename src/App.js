@@ -1,25 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+
 import './App.css';
+import 'materialize-css/dist/css/materialize.min.css'
+
+import Tabela from './components/Tabela'
+import Formulario from './components/Formulario'
+import Header from './components/Header'
 
 function App() {
+
+  const  [autores, setAutores] = useState([
+    {
+      nome: 'Paulo',
+      livro: 'React',
+      preco: '1000'
+    },
+    {
+      nome: 'Daniel',
+      livro: 'Java',
+      preco: '99'
+    },
+    {
+      nome: 'Renato',
+      livro: 'Design',
+      preco: '150'
+    },
+    {
+      nome: 'Bruno',
+      livro: 'DevOps',
+      preco: '100'
+    },
+  ]);
+
+  function removeAutor(index){
+    // const {autores} = autores
+
+    setAutores(
+      autores.filter( (autor, posAtual) => {
+        // console.log("autores:", autor);
+        // console.log("posAtual:", posAtual);
+        // console.log("index", index);
+        return posAtual !== index;
+      } )
+    )
+  }
+
+  function escutadorSubmit(autor){
+    console.log("novoAutor:", autor);
+    // console.log(autores, autor);
+    setAutores(autores => [...autores,autor])
+    // setAutores(autores => ({...autores,autor}))
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <div className="container mb-10">
+      <Tabela autores={autores} removeAutor={removeAutor} />
+      <br/>
+      <Formulario escutadorSubmit={escutadorSubmit} />
+      </div>
+    </>
   );
 }
 
