@@ -2,16 +2,34 @@ import React, {useState } from 'react';
 
 import FormValidator from '../FormValidator'
 import validator from 'validator';
+import PopUp from '../PopUp'
 // import { Container } from './styles';
 
 
 export default function Formulario(props) {
 
   // this.validator = new FormValidator()
-  const validator = new FormValidator({
-    campo: 'nome',
-    metodo: 'isEmpty'
-  })
+  const validator = new FormValidator([
+    {
+      campo: 'nome',
+      metodo: 'isEmpty',
+      validoQuando: false,
+      mensagem: 'Entre com um nome'
+    },
+    {
+      campo: 'livro',
+      metodo: 'isEmpty',
+      validoQuando: false,
+      mensagem: 'Entre com um livro'
+    },
+    {
+      campo: 'preco',
+      metodo: 'isInt',
+      args: [{ min: 0, max: 99999 }],
+      validoQuando: true,
+      mensagem: 'Entre com um valor numerico'
+    },
+  ])
   
   const [nome, setNome] = useState('')
   const [livro, setLivro] = useState('')
@@ -22,13 +40,29 @@ export default function Formulario(props) {
     const data = {
       nome,
       livro,
-      preco
+      preco,
+      validacao: validator.valido()
     }
-    if(validator.valida(data)){
+
+    const validacao = validator.valida(data)
+
+    if(validacao.isValid){
       props.escutadorSubmit(data)
       setPreco('')
       setLivro('')
       setNome('')
+    }else{
+      const {nome, livro, preco} = validacao
+      const campos = [nome, livro, preco]
+
+      const camposInvalidos = campos.filter(elem => {
+        return elem.isInvalid
+      })
+
+      camposInvalidos.forEach(campo =>{
+        PopUp.exibeMensagem('error', campo.mensagem)
+      } );
+
     }
 
   }

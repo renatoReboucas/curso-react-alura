@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
 import './App.css';
+import 'jquery/dist/jquery'
 import 'materialize-css/dist/css/materialize.min.css'
 
 
