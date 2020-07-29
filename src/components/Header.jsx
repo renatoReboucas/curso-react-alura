@@ -5,7 +5,7 @@ export default function Header(props){
   return(
     <nav>
       <div class="nav-wrapper indigo lighten-2">
-        <a href="/" class="brand-logo">Casa do Código</a>
+        <a href="/" className="brand-logo">Casa do Código</a>
         <ul class="right">
           <li><a href="/autores">Autores</a></li>
           <li><a href="/livros">Livros</a></li>
