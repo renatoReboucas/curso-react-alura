@@ -8,7 +8,10 @@ import validator from 'validator';
 export default function Formulario(props) {
 
   // this.validator = new FormValidator()
-  const validator = new FormValidator()
+  const validator = new FormValidator({
+    campo: 'nome',
+    metodo: 'isEmpty'
+  })
   
   const [nome, setNome] = useState('')
   const [livro, setLivro] = useState('')
@@ -26,8 +29,6 @@ export default function Formulario(props) {
       setPreco('')
       setLivro('')
       setNome('')
-    }else{
-      console.log("Submit bloqueado!");
     }
 
   }
