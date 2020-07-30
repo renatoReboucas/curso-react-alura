@@ -5,6 +5,7 @@ import 'jquery/dist/jquery'
 import 'materialize-css/dist/css/materialize.min.css'
 
 
+
 import Tabela from './components/Tabela'
 import Formulario from './components/Formulario'
 import Header from './components/Header'
@@ -58,6 +59,7 @@ function App() {
     <>
       <Header />
       <div className="container mb-10">
+        <h1>Casa do Código</h1>
       <Tabela autores={autores} removeAutor={removeAutor} />
       <br/>
       <Formulario escutadorSubmit={escutadorSubmit} />

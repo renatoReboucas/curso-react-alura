@@ -60,7 +60,7 @@ export default function Formulario(props) {
       })
 
       camposInvalidos.forEach(campo =>{
-        PopUp.exibeMensagem('error', campo.mensagem)
+        PopUp.exibeMensagem('error', campo.message)
       } );
 
     }
