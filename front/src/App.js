@@ -55,6 +55,10 @@ function App() {
     // setAutores(autores => ({...autores,autor}))
   }
 
+  fetch('http://localhost:8000/api/autor')
+    .then(res => res.json())
+    .then
+
   return (
     <>
       <Header />
